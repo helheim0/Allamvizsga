@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginBottom="39dp"
+            android:fontFamily="monospace"
+            android:text="Log in."
+            android:textColor="@android:color/white"
+            android:textSize="55sp"
+            android:textColorHint="@color/colorPrimaryDark"
+            />
+
+        <!-- Email text input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/TextInputLayoutAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="17dp"
+        android:hint="Email"
+        android:textSize="23sp"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/loginactivity_btn">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginemail_edittext"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password text input-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            style="@style/TextInputLayoutAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="17dp"
+            android:hint="Password"
+            android:textSize="23sp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/loginactivity_btn">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginpsw_edittext"
+                android:layout_width="326dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/colorPrimaryDark" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/loginactivity_btn"
+            android:layout_width="260dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="56dp"
+
+            android:background="@drawable/my_whitebutton"
+            android:text="Log in"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <CheckBox
+            android:id="@+id/rmbr_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="16dp"
+            android:text="Remember me."
+            android:textColor="#FFC30B"
+            />
+
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

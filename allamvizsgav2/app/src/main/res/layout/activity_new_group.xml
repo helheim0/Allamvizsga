@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <!-- Let's team up!-->
+
+    <!-- Team name text input-->
+    <TextView
+        android:id="@+id/team_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="monospace"
+        android:text="Let's team up!"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="45sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "35dp"
+        android:layout_marginStart = "18dp"
+        android:layout_marginEnd = "18dp"
+        style="@style/TextInputLayoutAppearance"
+        app:boxStrokeColor="@color/colorPrimary"
+        android:textSize="23sp"
+        android:hint="Team name:" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/team_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Team description text input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "20dp"
+        android:layout_marginStart = "18dp"
+        android:layout_marginEnd = "18dp"
+        style="@style/TextInputLayoutAppearance"
+        app:boxStrokeColor="@color/colorPrimary"
+        android:textSize="23sp"
+        android:hint="Description:" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/team_desc_et"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:textColor="@color/colorPrimaryDark" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="116dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageButton
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_add" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_team_btn"
+        android:layout_width="230dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/custom_button"
+        android:radius="15dp"
+        android:text="Create team!"
+        android:textSize="20sp" />
+
+</LinearLayout>
