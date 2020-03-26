@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="3"
+    tools:context=".activities.AcceptInvitationActivity"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1.2">
+        <TextView
+            android:id="@+id/group_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="GROUP NAME"
+            android:textColor="@color/myWhite"
+            android:textSize="36sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/group_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="75dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/descTxtView"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="75dp"
+            android:maxLines="7"
+            android:scrollbars="vertical"
+            android:text="Lorem Ipsum is simply dummy text of thehe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and typeshe printing and types printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s."
+            android:textColor="@color/myGray"
+            android:typeface="sans" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/invitationCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/invitation_code"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/TextInputLayoutAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:hint="@string/enter_inv_code"
+            android:textSize="23sp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/invitationCodeEt"
+                android:layout_width="328dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:textColor="@color/colorPrimaryDark" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/acceptBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_gravity="center"
+            android:text="@string/join"
+           android:background="@drawable/my_color_button" />
+    </LinearLayout>
+</LinearLayout>

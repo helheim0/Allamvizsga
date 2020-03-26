@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.MaterialComponents.NoActionBar"
+    tools:context=".activities.CreateEventActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/topBar"/>
+
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_below="@+id/topBar"
+            android:layout_above="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/eventTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/new_event_title"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="42sp" />
+
+                <!-- Event name text input-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/eventName_til"
+                    style="@style/TextInputLayoutAppearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/eventTitle"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:hint="@string/event_name"
+                    android:textSize="23sp"
+                    app:boxStrokeColor="@color/colorPrimaryDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/eventName_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/spinner"
+                        android:hint="@string/event_name"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Location text input-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/location_til"
+                    style="@style/TextInputLayoutAppearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/eventName_til"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="18dp"
+                    android:textSize="23sp"
+                    app:boxStrokeColor="@color/colorPrimaryDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/location_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/event_location"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Desciption text input-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/desc_til"
+                    style="@style/TextInputLayoutAppearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/location_til"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="18dp"
+                    android:textSize="23sp"
+                    app:boxStrokeColor="@color/colorPrimaryDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/desc_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/description"
+                        android:maxLines="5"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!-- Date text input-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/date_til"
+                    style="@style/TextInputLayoutAppearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/desc_til"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="18dp"
+                    android:textSize="23sp"
+                    app:boxStrokeColor="@color/colorPrimaryDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/date_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="@string/date"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/eventImgUpload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="18dp"
+                        tools:src="@tools:sample/avatars"
+                        android:layout_below="@+id/date_til"/>
+
+            <!-- Create button -->
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_below="@+id/date_til"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="35dp"
+                android:layout_toEndOf="@+id/eventImgUpload"
+                android:background="@drawable/ic_add_black_24dp" />
+
+            <Button
+                    android:id="@+id/create_button"
+                    android:layout_width="260dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/eventImgUpload"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/my_color_button"
+                    android:text="@string/create_event"
+                    android:textColor="@color/myWhite" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/bottomBar"
+            android:layout_alignParentBottom="true">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/bottomNavView_Bar"
+                app:itemBackground="@color/white"
+                app:itemTextColor="@color/colorPrimary"
+                app:itemIconTint="@color/colorPrimary"
+                app:menu="@menu/main_menu"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:transitionName="img"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/shadow"
+                android:src="@drawable/shadow_bg"
+                android:transitionName="img"
+                android:layout_alignBottom="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="60dp"/>
+
+            <TextView
+                android:id="@+id/event_location"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:textColor="@color/myWhite"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:text="LOCATION"
+                android:gravity="bottom"
+                android:layout_marginEnd="168dp"
+                android:layout_alignStart="@+id/event_name"
+                android:layout_alignTop="@+id/date_layout"
+                android:layout_alignEnd="@id/date_layout"/>
+
+            <FrameLayout
+                android:id="@+id/date_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image"
+                android:padding="5dp"
+                android:background="@drawable/round_bg"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="-40dp"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/date_icon"
+                    android:src="@drawable/ic_date_18dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" />
+                <TextView
+                    android:id="@+id/event_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="18dp"
+                    android:text="2020.06.05"/>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/event_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textSize="20sp"
+                android:layout_below="@+id/image"
+                android:layout_marginTop="10dp"
+                android:text="EVENT TITLE"/>
+
+            <TextView
+                android:id="@+id/event_description"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:maxLines="4"
+                android:text="fndsajnfjkasdnfkaldmsakldmfglkagdamfl"
+                android:layout_below="@id/event_name"
+                android:layout_margin="@dimen/activity_horizontal_margin"/>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

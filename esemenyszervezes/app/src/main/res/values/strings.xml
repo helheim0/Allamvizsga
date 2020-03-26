@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">esemenyszervezes</string>
+
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+
+    <string name="team_api">![CDATA[https://localhost/laravel/allamvizsga_backend/public/api/teams]]</string>
+    <!-- MAIN PAGE -->
+    <string name="main_page_logo">Logo name</string>
+    <string name="log_in_caps">LOG IN</string>
+    <string name="sign_up_caps">SIGN UP</string>
+    <string name="or">or</string>
+
+    <!-- LOG IN -->
+    <string name="log_in">Log in.</string>
+    <string name="sign_up">Sign up.</string>
+    <string name="remember_me">Remember me</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <!-- REGISTER -->
+    <string name="full_name">Full name</string>
+    <string name="username">Username</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="register_as_admin">Register as an admin</string>
+    <string name="get_started">Get started!</string>
+    <string name="phone_number">Phone number</string>
+
+    <!-- NEW GROUP -->
+    <string name="new_team_title">Let\'s team up!</string>
+    <string name="team_name">Team name</string>
+    <string name="description">Description</string>
+    <string name="create_team">Create team!</string>
+
+    <!-- NEW EVENT -->
+    <string name="new_event_title">Get moving!</string>
+    <string name="event_name">Event name</string>
+    <string name="event_location">Location</string>
+    <string name="create_event">Create!</string>
+    <string name="activity_type">Activity type</string>
+    <string name="people">People</string>
+    <string name="date">Date</string>
+
+    <!-- ACCEPT GROUP INVITATION -->
+    <string name="invitation_code">Invitation code</string>
+    <string name="enter_code">Enter code</string>
+    <string name="join">Join</string>
+    <string name="decline">Decline</string>
+    <string name="enter_inv_code">Enter invitation code</string>
+
+    <!-- HOMEPAGE -->
+    <string name="upcoming_events">My upcoming events</string>
+    <string name="my_teams">My teams</string>
+
+    <!-- EVENT INVITATION -->
+    <string name="participants">Participants\:</string>
+
+
+    <!-- EVENT DETAIL -->
+    <string name="invited">Invited\:</string>
+    <string name="going">Going\:</string>
+    <string name="cant_go">Can\'t go\:</string>
+    <string name="maybe">Maybe\:</string>
+
+    <!-- GROUP HOMEPAGE -->
+    <string name="members">Members</string>
+    <string name="events">Events</string>
+
+    <!-- MENU -->
+    <string name="home">Members</string>
+    <string name="profile">Profile</string>
+    <string name="teams">Teams</string>
+    <string name="settings">Settings</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+
+</resources>
