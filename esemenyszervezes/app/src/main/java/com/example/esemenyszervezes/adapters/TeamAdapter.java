@@ -45,15 +45,13 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull TeamAdapter.MyViewHolder holder, int position) {
        Team team = teamList.get(position);
         holder.title.setText(teamList.get(position).getName());
-        holder.image.setImageResource(teamList.get(position).getImage());
         //holder.image.setImageResource(teamList.get(position).getImage());
-       // Glide.with(mContext).load(teamList.get(position).getImage()).apply(RequestOptions.centerCropTransform()).into(holder.image);
+        //holder.image.setImageResource(teamList.get(position).getImage());
+        Glide.with(mContext).load(teamList.get(position).getImage()).apply(RequestOptions.centerCropTransform()).into(holder.image);
     }
 
     @Override
     public int getItemCount() {
-        if(teamList == null)
-            return 0;
         return teamList.size();
     }
 

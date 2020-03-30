@@ -39,6 +39,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     private EditText mName, mDescription;
     private ImageView mImage;
     private Button mButton;
+    private static String token;
     private static final String TAG = "CreateTeamActivity";
     private static final int ACTIVITY_NUM = 2;
     private Context mContext = CreateTeamActivity.this;
@@ -58,7 +59,7 @@ public class CreateTeamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = mName.getText().toString().trim();
-
+                String description = mDescription.getText().toString().trim();
                 final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
                 progressDialog.setMessage("Logging in...");
                 progressDialog.show();
@@ -72,12 +73,13 @@ public class CreateTeamActivity extends AppCompatActivity {
                 ApiService service = RetrofitBuilder.getRetrofitInstance().create(ApiService.class);
 
 
-                Call<Result> call = service.createTeam(name);
+                Call<Result> call = service.createTeam("Bearer "+token, name);
                 call.enqueue(new Callback<Result>() {
                     @Override
                     public void onResponse(Call<Result> call, Response<Result> response) {
                         progressDialog.dismiss();
-                        if (!response.body().getError()) {
+                        if (response.isSuccessful()) {
+                            token = response.body().getAccess_token();
                             Intent home = new Intent(getApplicationContext(), HomePageActivity.class);
                             home.putExtra("token", response.body().getAccess_token());
                             startActivity(home);

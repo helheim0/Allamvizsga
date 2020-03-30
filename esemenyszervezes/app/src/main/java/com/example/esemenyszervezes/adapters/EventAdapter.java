@@ -52,13 +52,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         holder.description.setText(eventList.get(position).getDescription());
         holder.date.setText(eventList.get(position).getDate());
         holder.location.setText(eventList.get(position).getLocation());
-        holder.image.setImageResource(eventList.get(position).getImage());
 
-        Event model = eventList.get(position);
+       /* Event model = eventList.get(position);
 
         RequestOptions requestOptions = new RequestOptions();
 
-        Glide.with(mContext)
+       Glide.with(mContext)
                 .load(eventList.get(position).getImage())
                 .apply(RequestOptions.centerCropTransform())
                 .listener(new RequestListener<Drawable>() {
@@ -74,27 +73,22 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
                     }
                 })
         .transition(DrawableTransitionOptions.withCrossFade())
-        .into(holder.image);
+        .into(holder.image);*/
     }
 
     @Override
     public int getItemCount() {
-        if(eventList == null)
-            return 0;
         return eventList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
         public TextView title, description, date, location;
-        public ImageView image;
         ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
 
         public MyViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.event_name);
-            image = (ImageView) itemView.findViewById(R.id.image);
             description = (TextView) itemView.findViewById(R.id.event_description);
             date = (TextView) itemView.findViewById(R.id.event_date);
             location = (TextView) itemView.findViewById(R.id.event_location);

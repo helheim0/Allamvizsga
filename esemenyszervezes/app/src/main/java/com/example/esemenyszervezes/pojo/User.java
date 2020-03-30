@@ -1,5 +1,7 @@
 package com.example.esemenyszervezes.pojo;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +12,7 @@ public class User {
     @Expose
     private int mId;
 
-    @SerializedName("username")
+    @SerializedName("name")
     @Expose
     private String mUsername;
 
@@ -30,13 +32,7 @@ public class User {
     public User(){
 
     }
-    /**
-     *
-     * @param mUsername
-     * @param mFullname
-     * @param mPhone
-     * @param mEmail
-     */
+
     public User(String mUsername, String mFullname, int mPhone, String mEmail){
         this.mUsername = mUsername;
         this.mFullname = mFullname;
@@ -85,4 +81,14 @@ public class User {
         this.mEmail = mEmail;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "Data{" +
+                "name='" + mUsername + '\'' +
+                ", full_name='" + mFullname + '\'' +
+                ", phone='" + mPhone + '\'' +
+                ", email='" + mEmail + '\'' +
+                '}';
+    }
 }

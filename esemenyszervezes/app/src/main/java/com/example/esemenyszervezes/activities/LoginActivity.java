@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "LoginActivity";
+    public static final String PREFS_NAME = "LoginPrefs";
+    private static String token;
     private EditText username;
     private EditText password;
     private Button login;
@@ -39,11 +43,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-
         final ProgressDialog progressDialog = new ProgressDialog(this);
+        CheckBox checkBox = findViewById(R.id.rmbr_checkBox);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        final SharedPreferences.Editor editor = settings.edit();
+        editor.putString("logged", "logged");
 
-        String mUsername = username.getText().toString().trim();
-        String mPassword = password.getText().toString().trim();
+        final String mUsername = username.getText().toString().trim();
+        final String mPassword = password.getText().toString().trim();
 
         if(mUsername.isEmpty()){
             username.setError("Email is required!");
@@ -53,7 +60,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             password.setError("Password is required!");
             password.requestFocus();
         }
-
         else{
         progressDialog.setMessage("Logging in...");
         progressDialog.show();
@@ -63,10 +69,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
                 progressDialog.dismiss();
-                if (!response.body().getError()) {
+                if (response.isSuccessful()) {
+                    if(true){
+                        editor.putString("email", "");
+                        editor.putString("password", "");
+                    }
+                    editor.apply();
+
                     Intent home = new Intent(getApplicationContext(), HomePageActivity.class);
-                    home.putExtra("token", response.body().getAccess_token());
+                    Toast.makeText(getApplicationContext(), "Successful Login", Toast.LENGTH_SHORT).show();
+                    assert response.body() != null;
+                    token = response.body().getAccess_token();
+                    home.putExtra("email", mUsername);
+                    home.putExtra("password", mPassword);
                     startActivity(home);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_LONG).show();
                 }
@@ -82,6 +99,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      }
     }
 
+    private void keepLoggedIn(){
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        //Saving data
+        editor.putBoolean("key_name", true);
+        editor.putString("key_name", "string_value");
+
+        //Retrieving data
+        preferences.getBoolean("key_name", false);
+        preferences.getString("key_name", null);
+
+        //Deleting data
+        editor.remove("email");
+        editor.remove("password");
+
+        editor.commit();
+
+        editor.clear();
+        editor.commit();
+    }
     /*@Override
     protected void onDestroy(){
         super.onDestroy();

@@ -1,21 +1,16 @@
 package com.example.esemenyszervezes.pojo;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class Event implements Parcelable {
+public class Event {
 
     @SerializedName("id")
     @Expose
-    private int mEventId;
-
-    @SerializedName("admin")
-    @Expose
-    private int mAdminId;
+    private int id;
 
     @SerializedName("name")
     @Expose
@@ -29,25 +24,24 @@ public class Event implements Parcelable {
     @Expose
     private String mLocation;
 
-    @SerializedName("image")
-    @Expose
-    private int mImage;
-
     @SerializedName("description")
     @Expose
     private String mDescription;
+
+    @SerializedName("admin")
+    @Expose
+    private int mAdminId;
 
     //Constructors
     public Event(){
 
     }
 
-    public Event(String mName, String mDate, String mLocation, String mDescription, int mImage){
+    public Event(String mName, String mDate, String mLocation, String mDescription){
         this.mName = mName;
         this.mDate = mDate;
         this.mLocation = mLocation;
         this.mDescription = mDescription;
-        this.mImage = mImage;
     }
 
     //Initializing getters and setters
@@ -67,12 +61,8 @@ public class Event implements Parcelable {
         return mDescription;
     }
 
-    public int getImage(){
-        return mImage;
-    }
-
     public int getEventId(){
-        return mEventId;
+        return id;
     }
 
     public int getAdminId(){
@@ -91,26 +81,19 @@ public class Event implements Parcelable {
         this.mLocation = mLocation;
     }
 
-    public void setmDescription(){
+    public void setDescription(){
         this.mDescription = mDescription;
     }
 
-    public void setImage(){
-        this.mImage = mImage;
-    }
-
-
+    @NonNull
     @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.mDate);
-        dest.writeString(this.mLocation);
-        dest.writeString(this.mDescription);
-        dest.writeString(this.mName);
-        dest.writeValue(this.mImage);
-    }
-}
+    public String toString() {
+        return "Data{" +
+                "id='" + id + '\'' +
+                ", name='" + mName + '\'' +
+                ", date='" + mDate + '\'' +
+                ", location='" + mLocation + '\'' +
+                ", description='" + mDescription + '\'' +
+                ", admin='" + mAdminId + '\'' +
+                '}';
+    }}

@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.esemenyszervezes.R;
 import com.example.esemenyszervezes.adapters.EventAdapter;
@@ -30,6 +32,7 @@ import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 0;
+    private static final String PREFS_NAME = "LoginPrefs";
     private Context mContext = HomePageActivity.this;
     private EventAdapter eventAdapter;
     private RecyclerView  mEventRecyclerView;
@@ -103,5 +106,14 @@ public class HomePageActivity extends AppCompatActivity {
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
+    }
+
+    //Shared preferences log out
+    public void logOut(View v){
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("logged");
+        editor.apply();
+        finish();
     }
 }

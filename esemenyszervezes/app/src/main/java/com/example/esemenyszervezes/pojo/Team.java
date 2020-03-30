@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class Team implements Parcelable {
+public class Team {
 
     @SerializedName("id")
     @Expose
@@ -19,14 +19,17 @@ public class Team implements Parcelable {
 
     @SerializedName("image")
     @Expose
-    private int mImage;
+    private String mImage;
 
+    @SerializedName("admin_id")
+    @Expose
+    private int mAdminId;
     //Constructors
     public Team(){
 
     }
 
-    public Team(String mName, int mImage){
+    public Team(String mName, String mImage){
         this.mName = mName;
         this.mImage = mImage;
     }
@@ -36,7 +39,7 @@ public class Team implements Parcelable {
         return mName;
     }
 
-    public int getImage(){
+    public String getImage(){
         return mImage;
     }
 
@@ -48,13 +51,12 @@ public class Team implements Parcelable {
         this.mImage = mImage;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
+    public String toString() {
+        return "Data{" +
+                "name='" + mName + '\'' +
+                ", image='" + mImage + '\'' +
+                '}';
     }
 }
