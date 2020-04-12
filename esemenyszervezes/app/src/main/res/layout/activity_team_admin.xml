@@ -1,86 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.MaterialComponents.NoActionBar"
     tools:context=".activities.TeamAdminActivity">
 
-    <TextView
-        android:id="@+id/team_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginTop="36dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="24sp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/team_name" />
-
-    <TextView
-        android:id="@+id/invite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginTop="36dp"
-        android:layout_below="@id/team_name"
-        android:textSize="24sp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/invited" />
-
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/invite" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/invite"
-        android:layout_toEndOf="@+id/search"/>
-
-    <TextView
-        android:id="@+id/invited"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginTop="36dp"
-        android:layout_below="@id/search"
-        android:textSize="24sp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/invited" />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/invited"
-        >
+        android:layout_height="match_parent">
 
-        <ListView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </androidx.core.widget.NestedScrollView>
+            android:layout_height="50dp"
+            android:id="@+id/topBar">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/invite_button"
-        android:text="@string/invited"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/scroll_view"/>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <include
-            android:id="@+id/bottom_nav"
-            layout="@layout/bottom_navigation"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"/>
+            android:layout_height="wrap_content">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</RelativeLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/my_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                android:elevation="4dp"
+                app:menu="@menu/top_menu"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_below="@+id/topBar"
+            android:layout_above="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/team_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_centerHorizontal="true"
+                android:text="TEAM NAME"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/invite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginTop="36dp"
+                android:layout_below="@id/team_title"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/invite_members" />
+
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search"
+                android:layout_width="344dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/invite" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/invite"
+                android:layout_toEndOf="@+id/search"/>
+
+            <TextView
+                android:id="@+id/invited"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginTop="36dp"
+                android:layout_below="@id/search"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/invited" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/invited">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </androidx.core.widget.NestedScrollView>
+
+            <Button
+                android:id="@+id/create_team_btn"
+                android:layout_width="260dp"
+                android:layout_height="60dp"
+                android:layout_below="@+id/scroll_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="14dp"
+                android:background="@drawable/my_color_button"
+                android:text="@string/invite"
+                android:textColor="@color/myWhite" />
+        </RelativeLayout>
+
+        <!-- bottom navigation -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/bottomBar"
+            android:layout_alignParentBottom="true">
+
+            <include layout="@layout/bottom_navigation"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

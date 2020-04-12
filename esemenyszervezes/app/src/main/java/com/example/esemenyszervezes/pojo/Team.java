@@ -1,11 +1,7 @@
 package com.example.esemenyszervezes.pojo;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 
 public class Team {
 
@@ -24,10 +20,9 @@ public class Team {
     @SerializedName("admin_id")
     @Expose
     private int mAdminId;
-    //Constructors
-    public Team(){
 
-    }
+    //Constructors
+    public Team(){ }
 
     public Team(String mName, String mImage){
         this.mName = mName;
@@ -50,7 +45,6 @@ public class Team {
     public void setImage(){
         this.mImage = mImage;
     }
-
 
     @Override
     public String toString() {

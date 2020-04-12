@@ -127,31 +127,12 @@
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageView
-                        android:id="@+id/eventImgUpload"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="18dp"
-                        android:layout_marginTop="18dp"
-                        tools:src="@tools:sample/avatars"
-                        android:layout_below="@+id/date_til"/>
-
             <!-- Create button -->
-            <Button
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_below="@+id/date_til"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="53dp"
-                android:layout_marginTop="35dp"
-                android:layout_toEndOf="@+id/eventImgUpload"
-                android:background="@drawable/ic_add_black_24dp" />
-
             <Button
                     android:id="@+id/create_button"
                     android:layout_width="260dp"
                     android:layout_height="60dp"
-                    android:layout_below="@+id/eventImgUpload"
+                    android:layout_below="@+id/date_til"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="14dp"
@@ -168,7 +149,7 @@
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:id="@+id/bottomNavView_Bar"
                 app:itemBackground="@color/white"
                 app:itemTextColor="@color/colorPrimary"

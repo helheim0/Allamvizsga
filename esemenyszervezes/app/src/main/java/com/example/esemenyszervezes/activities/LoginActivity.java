@@ -17,6 +17,7 @@ import com.example.esemenyszervezes.R;
 import com.example.esemenyszervezes.api.ApiService;
 import com.example.esemenyszervezes.pojo.Result;
 import com.example.esemenyszervezes.api.RetrofitBuilder;
+import com.example.esemenyszervezes.pojo.SaveSharedPrefs;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,6 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else{
         progressDialog.setMessage("Logging in...");
         progressDialog.show();
+
         ApiService service = RetrofitBuilder.getRetrofitInstance().create(ApiService.class);
         Call<Result> call = service.loginUser(mUsername, mPassword);
         call.enqueue(new Callback<Result>() {
@@ -70,24 +72,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onResponse(Call<Result> call, Response<Result> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
-                    if(true){
-                        editor.putString("email", "");
-                        editor.putString("password", "");
-                    }
-                    editor.apply();
-
-                    Intent home = new Intent(getApplicationContext(), HomePageActivity.class);
-                    Toast.makeText(getApplicationContext(), "Successful Login", Toast.LENGTH_SHORT).show();
-                    assert response.body() != null;
-                    token = response.body().getAccess_token();
-                    home.putExtra("email", mUsername);
-                    home.putExtra("password", mPassword);
-                    startActivity(home);
-                    finish();
+                    // Set Logged In statue to 'true'
+                    SaveSharedPrefs.setLoggedIn(getApplicationContext(), true);
+                    Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Credentials are not Valid.",
+                            Toast.LENGTH_SHORT).show();
+                      }
                 }
-            }
 
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
@@ -99,27 +92,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      }
     }
 
-    private void keepLoggedIn(){
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", 0);
-        SharedPreferences.Editor editor = preferences.edit();
-
-        //Saving data
-        editor.putBoolean("key_name", true);
-        editor.putString("key_name", "string_value");
-
-        //Retrieving data
-        preferences.getBoolean("key_name", false);
-        preferences.getString("key_name", null);
-
-        //Deleting data
-        editor.remove("email");
-        editor.remove("password");
-
-        editor.commit();
-
-        editor.clear();
-        editor.commit();
-    }
     /*@Override
     protected void onDestroy(){
         super.onDestroy();

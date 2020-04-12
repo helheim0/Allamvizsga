@@ -52,7 +52,7 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         String location = mLocation.getText().toString().trim();
 
         final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
-        progressDialog.setMessage("Logging in...");
+        progressDialog.setMessage("Creating event...");
         progressDialog.show();
         Log.d(TAG, "onClick: called");
 
@@ -64,7 +64,11 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                     public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                         progressDialog.dismiss();
                         if (response.isSuccessful()) {
+                            Log.d("Error", "Event created");
                             Toast.makeText(getApplicationContext(), "Event created successfully!", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_LONG).show();
                         }
                     }
 

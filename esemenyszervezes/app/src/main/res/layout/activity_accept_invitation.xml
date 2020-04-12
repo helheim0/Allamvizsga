@@ -83,7 +83,7 @@
                 android:id="@+id/invitationCodeEt"
                 android:layout_width="328dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
+                android:hint="@string/invitation_code"
                 android:textColor="@color/colorPrimaryDark" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,5 +95,16 @@
             android:layout_gravity="center"
             android:text="@string/join"
            android:background="@drawable/my_color_button" />
+        <TextView
+            android:id="@+id/decline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/decline"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:clickable="true"
+            android:focusable="true" />
     </LinearLayout>
 </LinearLayout>

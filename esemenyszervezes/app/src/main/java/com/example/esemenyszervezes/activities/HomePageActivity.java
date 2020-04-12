@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,8 +20,8 @@ import android.view.View;
 
 import com.example.esemenyszervezes.R;
 import com.example.esemenyszervezes.adapters.EventAdapter;
-import com.example.esemenyszervezes.fragments.EventFragment;
-import com.example.esemenyszervezes.fragments.TeamFragment;
+import com.example.esemenyszervezes.api.ApiService;
+import com.example.esemenyszervezes.api.RetrofitBuilder;
 import com.example.esemenyszervezes.pojo.BottomNavigationHelper;
 import com.example.esemenyszervezes.pojo.Event;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -29,6 +30,11 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class HomePageActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 0;
@@ -45,59 +51,10 @@ public class HomePageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
-       setupBottomNavigationView();
-       // getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new EventFragment()).commit();
-        /*
-        ApiService service = RetrofitBuilder.getRetrofitInstance().create(ApiService.class);
-        Call<List<Event>> call = service.listEvents();
-
-        call.enqueue(new Callback<List<Event>>() {
-            @Override
-            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-               if(response.isSuccessful()){
-                   if(!eventList.isEmpty()){
-                       eventList.clear();
-                   }
-
-                   eventList = response.body();
-                   Log.d("TAG","Response = "+ eventList);
-                   eventAdapter = new EventAdapter(HomePageActivity.this, eventList);
-                   mEventRecyclerView.setAdapter(eventAdapter);
-                   eventAdapter.notifyDataSetChanged();
-               }
-               else{
-                   Toast.makeText(HomePageActivity.this, "No event", Toast.LENGTH_SHORT).show();
-               }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Event>> call, Throwable t) {
-                Log.d("response", "Hiba");
-                Toast.makeText(HomePageActivity.this, "Hiba!!!!!!!", Toast.LENGTH_SHORT).show();
-                t.printStackTrace();
-
-            }
-        });*/
-      //  new FetchDataTask().execute();
+        setupBottomNavigationView();
     }
 
-  /*  private void init(){
-        mEventRecyclerView = (RecyclerView) findViewById(R.id.eventRV);
-        eventAdapter = new EventAdapter(getApplicationContext(), eventList);
-        eventManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mEventRecyclerView.setHasFixedSize(true);
-        mEventRecyclerView.setLayoutManager(eventManager);
-        mEventRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mEventRecyclerView.setNestedScrollingEnabled(false);
-
-        toolbar = getSupportActionBar();
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-    }
-*/
-
+    //Setting up bottom navigation
     private void setupBottomNavigationView(){
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation);
@@ -110,10 +67,30 @@ public class HomePageActivity extends AppCompatActivity {
 
     //Shared preferences log out
     public void logOut(View v){
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+       /*SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.remove("logged");
         editor.apply();
-        finish();
+        finish();*/
+        Retrofit retrofit = RetrofitBuilder.getRetrofitInstance();
+        ApiService loginServices = retrofit.create(ApiService.class);
+        Call<Void> logout = loginServices.logout();
+
+        logout.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("TAG", "onFailure: " + t.toString());
+                t.printStackTrace();
+            }
+        });
     }
 }
+

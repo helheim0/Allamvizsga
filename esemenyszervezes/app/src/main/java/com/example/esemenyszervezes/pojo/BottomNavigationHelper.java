@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.example.esemenyszervezes.R;
+import com.example.esemenyszervezes.activities.CreateEventActivity;
 import com.example.esemenyszervezes.activities.CreateTeamActivity;
 import com.example.esemenyszervezes.activities.EventsActivity;
 import com.example.esemenyszervezes.activities.HomePageActivity;
@@ -38,7 +39,7 @@ public class BottomNavigationHelper {
                         context.startActivity(new Intent(context, EventsActivity.class));
                         break;
                     case R.id.add:
-                        context.startActivity(new Intent(context, CreateTeamActivity.class));
+                        context.startActivity(new Intent(context, CreateEventActivity.class));
                         break;
                     case R.id.teams:
                         context.startActivity(new Intent(context, TeamsActivity.class));

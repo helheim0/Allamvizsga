@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.esemenyszervezes.R;
+import com.example.esemenyszervezes.pojo.SaveSharedPrefs;
 
 public class MainActivity extends AppCompatActivity {
 Button register, login;
@@ -21,10 +22,10 @@ public static final String PREFS_NAME = "LoginPrefs";
         register = findViewById(R.id.main_signup);
         login = findViewById(R.id.main_login);
 
-        //Shared preferences
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        if(settings.getString("logged", "").toString().equals("logged")){
-            Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
+        //Checking if user is already logged in
+        if(SaveSharedPrefs.getLoggedStatus(getApplicationContext())) {
+            Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+            startActivity(intent);
         }
     }
 

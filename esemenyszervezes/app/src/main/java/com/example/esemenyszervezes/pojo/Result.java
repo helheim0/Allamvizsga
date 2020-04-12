@@ -6,10 +6,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Result {
 
-    @SerializedName("access_token")
-    @Expose
-    private String access_token;
-
     @SerializedName("error")
     @Expose
     private Boolean error;
@@ -18,20 +14,27 @@ public class Result {
     @Expose
     private String message;
 
-    @SerializedName("user")
+    @SerializedName("access_token")
     @Expose
-    private User user;
+    private String access_token;
 
-    public Result(Boolean error, String message, User user) {
+    @SerializedName("token_type")
+    @Expose
+    private String token_type;
+
+    @SerializedName("id")
+    @Expose
+    private int id;
+
+    public Result(Boolean error, String message, String access_token, String token_type, int id) {
         this.error = error;
         this.message = message;
-        this.user = user;
+        this.access_token = access_token;
+        this.token_type = token_type;
+        this.id = id;
     }
 
-    public String getAccess_token() {
-        return access_token;
-    }
-
+    //Getters + setters
     public Boolean getError() {
         return error;
     }
@@ -40,8 +43,27 @@ public class Result {
         return message;
     }
 
-    public User getUser() {
-        return user;
+    public String getAccess_token() {
+        return access_token;
     }
 
+    public String getToken_type() {
+        return token_type;
+    }
+
+    public int getUserId() {
+        return id;
+    }
+
+    public void setAccess_token(){
+        this.access_token = access_token;
+    }
+
+    public void setToken_type(){
+        this.token_type = token_type;
+    }
+
+    public void setId(){
+        this.id = id;
+    }
 }

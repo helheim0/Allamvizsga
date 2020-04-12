@@ -33,7 +33,7 @@ public class Event {
     private int mAdminId;
 
     //Constructors
-    public Event(){
+   /* public Event(){
 
     }
 
@@ -42,7 +42,7 @@ public class Event {
         this.mDate = mDate;
         this.mLocation = mLocation;
         this.mDescription = mDescription;
-    }
+    }*/
 
     //Initializing getters and setters
     public String getName(){
@@ -85,7 +85,7 @@ public class Event {
         this.mDescription = mDescription;
     }
 
-    @NonNull
+    /*@NonNull
     @Override
     public String toString() {
         return "Data{" +
@@ -96,4 +96,5 @@ public class Event {
                 ", description='" + mDescription + '\'' +
                 ", admin='" + mAdminId + '\'' +
                 '}';
-    }}
+    }*/
+}
