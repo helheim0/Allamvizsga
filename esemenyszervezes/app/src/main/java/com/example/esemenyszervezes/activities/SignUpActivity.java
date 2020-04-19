@@ -52,79 +52,90 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String repPassword = mPasswordRep.getText().toString().trim();
         String phone = mPhone.getText().toString().trim();
 
-        checkValidity(name, fullName, email, password, repPassword, phone);
+        if(checkValidity(name, fullName, email, password, repPassword, phone)) {
 
-        Log.d(TAG, "onClick: login button clicked");
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Signing Up...");
-        progressDialog.show();
+            Log.d(TAG, "onClick: login button clicked");
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Signing Up...");
+            progressDialog.show();
 
-        ApiService service = RetrofitBuilder.getRetrofitInstance().create(ApiService.class);
-        Call<Result>  call = service.createUser(name, fullName, email, phone, password);
-        call.enqueue(new Callback<Result>() {
-            @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
-                Log.w(TAG, "onResponse: "  +response );
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
-                startActivity(intent);
-            }
+            ApiService service = RetrofitBuilder.getRetrofitInstance().create(ApiService.class);
+            Call<Result> call = service.createUser(name, fullName, email, phone, password);
+            call.enqueue(new Callback<Result>() {
+                @Override
+                public void onResponse(Call<Result> call, Response<Result> response) {
+                    Log.w(TAG, "onResponse: " + response);
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
 
-            @Override
-            public void onFailure(Call<Result> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
+                @Override
+                public void onFailure(Call<Result> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
-    public void checkValidity(String name, String fullName, String email, String password, String repPassword, String phone){
+    public boolean checkValidity(String name, String fullName, String email, String password, String repPassword, String phone){
 
         if(name.length() < 5){
             mUsername.setError("Username must have at least 5 characters!");
             mUsername.requestFocus();
+            return false;
         }
 
         else if(name.isEmpty()){
             mUsername.setError("Username cannot be empty!");
             mUsername.requestFocus();
+            return false;
         }
 
         else if(password.isEmpty()){
             mPassword.setError("Password cannot be empty!");
             mPassword.requestFocus();
+            return false;
         }
 
         else if(password.length()<6){
             mPassword.setError("Password must contain at least 6 characters!");
             mPassword.requestFocus();
+            return false;
         }
 
         else if(fullName.isEmpty()){
             mName.setError("Name cannot be empty!");
             mName.requestFocus();
+            return false;
         }
 
         else if(email.isEmpty()){
             mEmail.setError("Email cannot be empty!");
             mEmail.requestFocus();
+            return false;
         }
 
         else if(phone.isEmpty()){
             mPhone.setError("Phone cannot be empty!");
             mPhone.requestFocus();
+            return false;
         }
 
         else if(repPassword.isEmpty()){
             mPasswordRep.setError("Password check cannot be empty!");
             mPasswordRep.requestFocus();
+            return false;
         }
 
         else if(!(password.equals(repPassword))){
             mPasswordRep.setError("Passwords do not match!");
             mPasswordRep.requestFocus();
+            return false;
         }
+        else
+            return true;
     }
 }

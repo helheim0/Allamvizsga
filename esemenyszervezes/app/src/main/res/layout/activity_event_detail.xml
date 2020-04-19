@@ -79,8 +79,8 @@
             android:textColor="@color/colorPrimary"
             android:textSize="26sp" />
 
-        <ListView
-            android:id="@+id/going_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/going_RV"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_below="@+id/goingTv"
@@ -91,7 +91,7 @@
             android:id="@+id/cantgoTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/going_listview"
+            android:layout_below="@+id/going_RV"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="5dp"
@@ -100,8 +100,8 @@
             android:textColor="@color/colorPrimary"
             android:textSize="26sp" />
 
-        <ListView
-            android:id="@+id/cant_go_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cant_go_RV"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_below="@+id/cantgoTv"

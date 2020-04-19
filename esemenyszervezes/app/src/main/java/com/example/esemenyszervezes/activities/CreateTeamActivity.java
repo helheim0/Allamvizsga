@@ -1,10 +1,12 @@
 package com.example.esemenyszervezes.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,8 +19,10 @@ import android.widget.Toast;
 import com.example.esemenyszervezes.R;
 import com.example.esemenyszervezes.api.ApiService;
 import com.example.esemenyszervezes.api.RetrofitBuilder;
+import com.example.esemenyszervezes.api.TeamService;
 import com.example.esemenyszervezes.pojo.BottomNavigationHelper;
 import com.example.esemenyszervezes.pojo.Result;
+import com.example.esemenyszervezes.pojo.SaveSharedPrefs;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import retrofit2.Call;
@@ -32,6 +36,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     private static String token;
     private static int id;
     private static final String TAG = "CreateTeamActivity";
+    private static final String PREFS_NAME = "LoginPrefs";
     private static final int ACTIVITY_NUM = 2;
     private Context mContext = CreateTeamActivity.this;
 
@@ -40,50 +45,74 @@ public class CreateTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
 
+      /*  Intent intent = getIntent();
+        token = intent.getStringExtra("token");
+        id = intent.getIntExtra("id", 0);*/
+       // getData();
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        token = settings.getString("token", "");
+        id = settings.getInt("id", 0);
+        Log.d(TAG, "onResponse: id " + id + "token " + token);
         setupBottomNavigationView();
 
+        //Retrieving resources
         mName = findViewById(R.id.team_name_et);
-        mDescription = findViewById(R.id.desc_et);
+        mDescription = findViewById(R.id.team_desc_et);
         mButton = findViewById(R.id.create_team_btn);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = mName.getText().toString().trim();
-                String description = mDescription.getText().toString().trim();
+                final String name = mName.getText().toString().trim();
+                final String description = mDescription.getText().toString().trim();
 
-                final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
-                progressDialog.setMessage("Creating team...");
-                progressDialog.show();
+                //Checking input fields
+                if (checkValidity(name, description)) {
 
-                Log.d(TAG, "onClick: called");
-                ApiService service = RetrofitBuilder.getRetrofitInstance().create(ApiService.class);
-                Call<Result> call = service.createTeam("Bearer "+token, name, description, id);
-                call.enqueue(new Callback<Result>() {
-                    @Override
-                    public void onResponse(Call<Result> call, Response<Result> response) {
-                        progressDialog.dismiss();
-                        if (response.isSuccessful()) {
-                            assert response.body() != null;
-                            token = response.headers().get("Authorization");
-                            id = response.body().getUserId();
-                            Intent home = new Intent(getApplicationContext(), TeamAdminActivity.class);
-                            home.putExtra("token", response.body().getAccess_token());
-                            startActivity(home);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "onClick: called");
+                    final ProgressDialog progressDialog = new ProgressDialog(CreateTeamActivity.this);
+                    progressDialog.setMessage("Creating team...");
+                    progressDialog.show();
+
+                    //
+
+                    TeamService service = RetrofitBuilder.getRetrofitInstance().create(TeamService.class);
+                    Call<Result> call = service.createTeam("Bearer " + token, name, description, id);
+                    Log.d(TAG, "onResponse: passed params" + name + description );
+                    Log.d(TAG, "onClick: passed id" + id);
+                    call.enqueue(new Callback<Result>() {
+
+                        @Override
+                        public void onResponse(@NonNull Call<Result> call, @NonNull Response<Result> response) {
+                            progressDialog.dismiss();
+                            if (response.isSuccessful()) {
+                              /*  assert response.body() != null;
+                                token = response.headers().get("Authorization");*/
+                                Log.d(TAG, "successful: passed params" + name + description );
+                                Log.d(TAG, "successfuul: passed id" + id);
+                                Intent home = new Intent(CreateTeamActivity.this, TeamAdminActivity.class);
+                                assert response.body() != null;
+                                home.putExtra("token", response.body().getAccess_token());
+                                startActivity(home);
+                            } else {
+                                Log.d(TAG, "wrong: passed params" + name + description );
+                                Log.d(TAG, "wong: passed id" + id);
+                                Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Result> call, Throwable t) {
-                        progressDialog.dismiss();
-                        Log.d("Error", t.getMessage());
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Result> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Log.d(TAG, "fail: passed params" + name + description );
+                            Log.d(TAG, "fail: passed id" + id);
+                            Log.d("Error", t.getMessage());
+                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
             }
         });
-
     }
 
     //Setting up the bottom navigation
@@ -95,5 +124,23 @@ public class CreateTeamActivity extends AppCompatActivity {
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
+    }
+
+    //Validate input
+    public boolean checkValidity(String name, String description){
+        Log.d(TAG, "checkValidity: called");
+        if(name.isEmpty()){
+            mName.setError("Name cannot be empty");
+            mName.requestFocus();
+            return false;
+        }
+
+        else if(description.isEmpty()){
+            mDescription.setError("Description cannot be empty!");
+            mDescription.requestFocus();
+            return false;
+        }
+        else return true;
+
     }
 }

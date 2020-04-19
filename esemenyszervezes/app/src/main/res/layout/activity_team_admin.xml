@@ -63,13 +63,27 @@
                 android:textColor="@color/colorPrimary"
                 android:text="@string/invite_members" />
 
-
-            <androidx.appcompat.widget.SearchView
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/search"
-                android:layout_width="344dp"
+                style="@style/TextInputLayoutAppearance"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/invite" />
+                android:layout_below="@id/invite"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:hint="@string/search"
+                android:textSize="23sp"
+                app:boxStrokeColor="@color/colorPrimaryDark">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/eventName_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/spinner"
+                    android:hint="@string/event_name"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

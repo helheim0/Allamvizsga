@@ -1,6 +1,7 @@
 package com.example.esemenyszervezes.api;
 
 import com.example.esemenyszervezes.pojo.Event;
+import com.example.esemenyszervezes.pojo.Result;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiEvents {
     /*
@@ -19,19 +22,34 @@ public interface ApiEvents {
     @FormUrlEncoded
     @Multipart
     @POST("events")
-    Call<List<Event>> createEvent(
+    Call<Result> createEvent(
             @Header("Authorization") String token,
-            @Field("name") String name,
-            @Field("date") String date,
-            @Field("location") String location,
-            @Field("description") String description
-            //  @Field("admin_id") String admin
+            @Query("name") String name,
+            @Query("date") String date,
+            @Query("location") String location,
+            @Query("description") String description,
+            @Query("admin_id") int admin
     );
+
     /*
     List events
      */
-    @GET("events")
-    Call<List<Event>> listEvents();
-//    Call<List<Event>> listEvents(@Header("Authorization") String token);
+    @GET("events/{id}")
+    //Call<List<Event>> listEvents();
+    Call<List<Event>> listEvents(
+            @Header("Authorization:close") String token,
+            @Path("id") int id
+    );
 
+    @GET("events/{id}")
+    Call<Event> showEventInvitation(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @GET("events/{id}")
+    Call<Event> getParticipants(
+            @Header("Authorization:close") String token,
+            @Path("id") int id
+    );
 }

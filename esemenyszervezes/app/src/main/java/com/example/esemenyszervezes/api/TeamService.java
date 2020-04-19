@@ -13,36 +13,33 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface TeamService {
+
     /*
      *   Create new team
      */
-    @FormUrlEncoded
-    @Multipart
     @POST("teams")
     Call<Result> createTeam(
             @Header("Authorization") String token,
-            @Field("name") String name
-            //@Field("image") String image
-            //@Part MultipartBody.Part image
-            //  @Field("admin_id") String admin
+            @Query("name") String name,
+            @Query("description") String description,
+            @Query("admin_id") int id
     );
-
-    /*
-    List teams generally
-     */
-    @GET("teams")
-    Call<List<Team>> listTeams();
-    //Call<List<Team>> listTeams(@Header("Authorization") String token);
 
     /*
     Get a user's specific teams
      */
     @GET("teams/{id}")
     Call<List<Team>> listUserTeams(
-            @Header("Authorization") String token,
-            @Path("admin_id") int id
+            @Header("Authorization:close") String token,
+            @Path("id") int id
     );
 
+    @GET("teams/{id}/members")
+    Call<List<Team>> getMembers(
+            @Header("Authorization:close") String token,
+            @Path("id") int id
+    );
 }

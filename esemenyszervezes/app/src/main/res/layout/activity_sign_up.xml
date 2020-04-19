@@ -27,11 +27,9 @@
             style="@style/TextInputLayoutAppearance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/signupTitle"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="55dp"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="65dp"
             android:textSize="23sp"
             app:boxStrokeColor="@color/colorPrimary">
 
@@ -53,8 +51,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="6dp"
-            android:layout_below="@+id/name_til"
-            android:layout_centerHorizontal="true"
             android:textSize="23sp"
             app:boxStrokeColor="@color/colorPrimary">
             <!-- Sign Up welcome text-->
@@ -76,8 +72,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="6dp"
-            android:layout_below="@+id/username_til"
-            android:layout_centerHorizontal="true"
             android:textSize="23sp"
             app:boxStrokeColor="@color/colorPrimary">
 
@@ -98,8 +92,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="6dp"
-            android:layout_below="@+id/email_til"
-            android:layout_centerHorizontal="true"
             android:textSize="23sp"
             app:boxStrokeColor="@color/colorPrimary">
 
@@ -120,8 +112,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="6dp"
-            android:layout_below="@+id/phone_til"
-            android:layout_centerHorizontal="true"
             android:hint="@string/password"
             android:textSize="23sp"
             app:boxStrokeColor="@color/colorPrimary"
@@ -145,8 +135,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="6dp"
-            android:layout_below="@+id/psw_til"
-            android:layout_centerHorizontal="true"
             android:hint="@string/repeat_password"
             android:textSize="23sp"
             app:boxStrokeColor="@color/colorPrimary"
@@ -167,9 +155,6 @@
         android:id="@+id/signup_button"
         android:layout_width="260dp"
         android:layout_height="60dp"
-        android:layout_below="@+id/psw_rep_til"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="25dp"

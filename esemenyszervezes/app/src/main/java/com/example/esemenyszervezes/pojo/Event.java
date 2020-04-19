@@ -1,12 +1,15 @@
 package com.example.esemenyszervezes.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class Event {
+public class Event implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -33,7 +36,7 @@ public class Event {
     private int mAdminId;
 
     //Constructors
-   /* public Event(){
+    public Event(){
 
     }
 
@@ -42,7 +45,7 @@ public class Event {
         this.mDate = mDate;
         this.mLocation = mLocation;
         this.mDescription = mDescription;
-    }*/
+    }
 
     //Initializing getters and setters
     public String getName(){
@@ -85,16 +88,48 @@ public class Event {
         this.mDescription = mDescription;
     }
 
-    /*@NonNull
+    // Parcelling part
+    protected Event(Parcel in){
+        mName = in.readString();
+
+       /* String[] data = new String[3];
+
+        in.readStringArray(data);
+        // the order needs to be the same as in writeToParcel() method
+        this.mName = data[0];*/
+      /*  this.mDescription = data[1];
+        this.mLocation = data[2];
+        this.mDate = data[3];*/
+    }
+
     @Override
-    public String toString() {
-        return "Data{" +
-                "id='" + id + '\'' +
-                ", name='" + mName + '\'' +
-                ", date='" + mDate + '\'' +
-                ", location='" + mLocation + '\'' +
-                ", description='" + mDescription + '\'' +
-                ", admin='" + mAdminId + '\'' +
-                '}';
-    }*/
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mName);
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
+    /*public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };*/
 }

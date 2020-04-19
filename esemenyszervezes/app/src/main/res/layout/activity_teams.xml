@@ -8,56 +8,80 @@
     tools:context=".activities.TeamsActivity">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/topBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/topBar">
+            android:layout_height="50dp">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TableLayout
+                    android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tabs"
-                    android:background="@color/colorAccent">
-                </TableLayout>
+                    android:background="@color/colorAccent"></TableLayout>
 
             </com.google.android.material.appbar.AppBarLayout>
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_below="@+id/topBar"
-            android:layout_above="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomBar"
+            android:layout_below="@+id/topBar">
 
             <TextView
                 android:id="@+id/myTeams"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/raleway_extralight"
                 android:text="@string/my_teams"
                 android:textColor="@color/colorPrimary"
-                android:textSize="22sp" />
+                android:textSize="32sp" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/team_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/myTeams"
-                android:id="@+id/team_recyclerview"/>
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_below="@+id/myTeams" />
 
         </RelativeLayout>
 
-        <!-- bottom navigation -->
-        <include layout="@layout/bottom_navigation"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/bottomBar"
+            android:layout_alignParentBottom="true">
+
+            <include layout="@layout/bottom_navigation"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/noTeams"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/raleway_extralight"
+        android:text="@string/no_teams"
+        android:textColor="@color/colorAccent"
+        android:textSize="32sp"
+        app:layout_anchor="@+id/relativeLayout2"
+        app:layout_anchorGravity="center"
+        android:visibility="gone"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

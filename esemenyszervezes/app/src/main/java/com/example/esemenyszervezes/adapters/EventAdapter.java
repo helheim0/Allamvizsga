@@ -1,6 +1,8 @@
 package com.example.esemenyszervezes.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.esemenyszervezes.R;
+import com.example.esemenyszervezes.activities.EventDetailActivity;
 import com.example.esemenyszervezes.pojo.Event;
 
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
     private Context mContext;
     private List<Event> eventList = new ArrayList<>();
-    private OnItemClickListener onItemClickListener;
+    private static final String TAG = "EventDetailActivity";
 
     public EventAdapter(Context mContext, List<Event> eventList){
         this.mContext = mContext;
@@ -34,7 +37,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_layout,parent, false);
-        return new MyViewHolder(view, onItemClickListener);
+        return new MyViewHolder(view, mContext);
     }
 
     @Override
@@ -43,28 +46,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         holder.description.setText(eventList.get(position).getDescription());
         holder.date.setText(eventList.get(position).getDate());
         holder.location.setText(eventList.get(position).getLocation());
-
-       /* Event model = eventList.get(position);
-
-        RequestOptions requestOptions = new RequestOptions();
-
-       Glide.with(mContext)
-                .load(eventList.get(position).getImage())
-                .apply(RequestOptions.centerCropTransform())
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        holder.progressBar.setVisibility(View.GONE);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        return false;
-                    }
-                })
-        .transition(DrawableTransitionOptions.withCrossFade())
-        .into(holder.image);*/
     }
 
     @Override
@@ -73,30 +54,29 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView title, description, date, location;
-        ProgressBar progressBar;
-        OnItemClickListener onItemClickListener;
+        TextView title, description, date, location;
 
-        public MyViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
+
+        public MyViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.event_name);
             description = (TextView) itemView.findViewById(R.id.event_description);
             date = (TextView) itemView.findViewById(R.id.event_date);
             location = (TextView) itemView.findViewById(R.id.event_location);
-            this.onItemClickListener = onItemClickListener;
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            onItemClickListener.onItemClick(v, getAdapterPosition());
+            final Event event = (Event)v.getTag();
+            if(event!= null){
+                Intent i = new Intent(mContext, EventDetailActivity.class);
+                //  i.putExtra("EVENT_DETAIL", new Event(title.toString(), description.toString(), location.toString(), date.toString()));
+                i.putExtra("EVENT_DETAIL",event);
+                mContext.startActivity(i);
+            }
         }
+
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    public interface OnItemClickListener{
-        void onItemClick(View view, int position);
-    }
 }

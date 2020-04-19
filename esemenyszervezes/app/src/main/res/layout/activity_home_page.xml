@@ -20,12 +20,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TableLayout
+                <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tabs"
-                    android:background="@color/colorAccent">
-                </TableLayout>
+                    android:id="@+id/home_toolbar"
+                    android:background="@color/white"
+                    android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar">
+                </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -53,7 +54,7 @@
         <!-- bottom navigation -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:id="@+id/bottomBar"
             android:layout_alignParentBottom="true">
 

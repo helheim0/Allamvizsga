@@ -7,14 +7,17 @@ import com.example.esemenyszervezes.adapters.ParticipantAdapter;
 import com.example.esemenyszervezes.api.ApiService;
 import com.example.esemenyszervezes.api.RetrofitBuilder;
 import com.example.esemenyszervezes.pojo.BottomNavigationHelper;
+import com.example.esemenyszervezes.pojo.Event;
 import com.example.esemenyszervezes.pojo.User;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -24,21 +27,34 @@ import retrofit2.Response;
 
 public class EventDetailActivity extends AppCompatActivity {
     private static final String TAG = "EventDetailActivity";
+    public static final String EVENT_DETAIL = "EVENT_DETAIL";
     private Context mContext;
     private ListView listView;
     private ParticipantAdapter adapter;
     private List<User> participantList;
+    private Event mEvent;
+    private TextView mEventName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
+        listView = findViewById(R.id.going_RV);
+        mEventName = findViewById(R.id.main_event_title);
+
         setupBottomNavigationView();
        /* ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);*/
-
-        listView = findViewById(R.id.going_listview);
+        Intent intent = new Intent();
+        Bundle data = getIntent().getExtras();
+        assert data != null;
+        mEvent = intent.getParcelableExtra(EVENT_DETAIL);
+        assert mEvent != null;
+        mEventName.setText(mEvent.getName());
+       /* mEvent = (Event)getIntent().getExtras().getSerializable(EVENT_DETAIL);
+        mEventName.setText(mEvent.getName());*/
         loadData();
     }
 

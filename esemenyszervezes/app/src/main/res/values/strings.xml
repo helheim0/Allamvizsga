@@ -72,12 +72,14 @@
     <string name="members">Members</string>
     <string name="events">Events</string>
     <string name="edit">Edit</string>
+    <string name="no_teams">You have no teams yet! Don\'t worry, click on the \'+\' icon to get started or join a team!</string>
+    <string name="no_events">You have no upcoming events!</string>
+
 
     <!-- Menu -->
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="teams">Teams</string>
-
     <string name="fcm_token">FCM Token: %s</string>
 
 

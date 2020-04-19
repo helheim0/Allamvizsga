@@ -60,17 +60,6 @@ public interface ApiService {
     @DELETE("users/{id}")
     Call<User> deleteUserWithID(@Path("id") int id);
 
-    /*
-    *   Create new team
-     */
-    @FormUrlEncoded
-    @POST("teams")
-    Call<Result> createTeam(
-      @Header("Authorization") String token,
-      @Field("name") String name,
-      @Field("description") String description,
-      @Field("admin_id") int admin
-    );
 
     @Multipart
     @POST("teams")
@@ -78,21 +67,6 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Part("description") RequestBody description,
             @Part MultipartBody.Part image
-    );
-    /*
-    List teams generally
-     */
-    @GET("teams")
-    Call<List<Team>> listTeams();
-    //Call<List<Team>> listTeams(@Header("Authorization") String token);
-
-    /*
-    Get a user's specific teams
-     */
-    @GET("teams/{id}")
-    Call<List<Team>> listUserTeams(
-            @Header("Authorization") String token,
-            @Path("admin_id") int id
     );
 
     /*
@@ -103,26 +77,5 @@ public interface ApiService {
            /* @Header("Authorization") String token,
             @Path("admin_id") int id*/
     );
-    /*
-    Create events
-     */
-    @FormUrlEncoded
-    @Multipart
-    @POST("events")
-    Call<List<Event>> createEvent(
-            @Header("Authorization") String token,
-            @Field("name") String name,
-            @Field("date") String date,
-            @Field("location") String location,
-            @Field("description") String description
-            //  @Field("admin_id") String admin
-    );
-    /*
-    List events
-     */
-    @GET("events")
-    Call<List<Event>> listEvents();
-//    Call<List<Event>> listEvents(@Header("Authorization") String token);
-
 
 }
