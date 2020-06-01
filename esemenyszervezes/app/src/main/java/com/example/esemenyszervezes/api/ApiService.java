@@ -1,24 +1,20 @@
 package com.example.esemenyszervezes.api;
 
-import com.example.esemenyszervezes.pojo.Event;
+import com.example.esemenyszervezes.pojo.EmailResponse;
 import com.example.esemenyszervezes.pojo.Result;
 import com.example.esemenyszervezes.pojo.Team;
 import com.example.esemenyszervezes.pojo.User;
 
 import java.util.List;
-
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface ApiService {
@@ -26,8 +22,8 @@ public interface ApiService {
     /*
     * Create new user
      */
-    @POST("register")
     @FormUrlEncoded
+    @POST("register")
     Call<Result> createUser(
             @Field("name") String username,
             @Field("full_name") String fullName,
@@ -49,8 +45,12 @@ public interface ApiService {
     @POST("logout")
     Call<Void> logout();
 
-    @GET("users")
-    Call<List<User>> getUsers(@Header("Authorization") String token);
+    /*
+    * Search for a user
+    *
+     */
+    @GET("users/search/{query}")
+    Call<List<User>> getUsers(@Header("Authorization") String token, @Path("query") String query);
 
     //Get one specific user
     @GET("users/{id}")
@@ -61,21 +61,21 @@ public interface ApiService {
     Call<User> deleteUserWithID(@Path("id") int id);
 
 
-    @Multipart
-    @POST("teams")
-    Call<Result> uploadImage(
-            @Header("Authorization") String token,
-            @Part("description") RequestBody description,
-            @Part MultipartBody.Part image
-    );
+    /*
+    * Invite user + send email
+     */
+    @FormUrlEncoded
+    @POST("teams/send")
+    Call<Result> inviteUser(@Header("Authorization:close") String token,
+                                   @Field("email") String email,
+                                   @Field("name") String name,
+                                   @Field("code") String code
+                          );
 
     /*
-    Get a user's specific teams
+    * Search for team with code/name
      */
-    @GET("members")
-    Call<List<User>> listTeamMembers(
-           /* @Header("Authorization") String token,
-            @Path("admin_id") int id*/
-    );
 
+    @GET("teams/search/{query}")
+    Call<List<Team>> searchTeams(@Header("Authorization") String token, @Path("query") String query);
 }

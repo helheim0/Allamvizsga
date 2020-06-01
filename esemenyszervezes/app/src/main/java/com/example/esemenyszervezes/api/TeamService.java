@@ -2,7 +2,9 @@ package com.example.esemenyszervezes.api;
 
 import com.example.esemenyszervezes.pojo.Result;
 import com.example.esemenyszervezes.pojo.Team;
+import com.example.esemenyszervezes.pojo.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,17 +31,47 @@ public interface TeamService {
     );
 
     /*
-    Get a user's specific teams
+    *   List teams
+    */
+
+    @GET("teams")
+    Call<List<Team>> listTeams(
+            @Header("Authorization") String token
+            );
+    /*
+     *  Get a user's specific teams
      */
-    @GET("teams/{id}")
+    @GET("teams/user/{id}")
     Call<List<Team>> listUserTeams(
             @Header("Authorization:close") String token,
             @Path("id") int id
     );
 
+    /*
+     *   Get ADMIN's teams
+     */
+    @GET("teams/admin/{id}")
+    Call<List<Team>> listAdminTeams(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    /*
+     *  Get members of a team
+     */
     @GET("teams/{id}/members")
-    Call<List<Team>> getMembers(
+    Call<List<User>> getMembers(
             @Header("Authorization:close") String token,
             @Path("id") int id
+    );
+
+    /*
+     *  Join a team
+     */
+    @POST("teams/join/{teamId}/{userId}")
+    Call<Result> joinTeam(
+            @Header("Authorization") String token,
+            @Path("teamId") int teamId,
+            @Path("userId") int userId
     );
 }

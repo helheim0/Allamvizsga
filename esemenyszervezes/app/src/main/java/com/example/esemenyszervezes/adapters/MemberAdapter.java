@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.esemenyszervezes.pojo.User;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class MemberAdapter extends ArrayAdapter {
     private List<User> memberList;
 
     public MemberAdapter(Context context, List<User> memberList) {
-        super(context, R.layout.member_model, memberList);
+        super(context, 0, memberList);
         this.context = context;
         this.memberList = memberList;
     }
@@ -49,18 +51,20 @@ public class MemberAdapter extends ArrayAdapter {
         return 0;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         ViewHolder holder;
 
         if (convertView == null) {
             holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert inflater != null;
             convertView = inflater.inflate(R.layout.member_model, null, true);
 
-            holder.name = (TextView) convertView.findViewById(R.id.member_name);
-            holder.username = (TextView) convertView.findViewById(R.id.member_username);
+            holder.name =  convertView.findViewById(R.id.member_name);
+            holder.username =  convertView.findViewById(R.id.member_username);
 
             convertView.setTag(holder);
         }else {

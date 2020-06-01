@@ -1,113 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.MaterialComponents.NoActionBar"
-    tools:context=".activities.TeamAdminActivity">
+    android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+    tools:context=".activities.EventDetailActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:visibility="invisible">
-
-            <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/topBar" style="@style/MyTheme">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/my_event_detail_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/my_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/white"
-                    android:elevation="4dp"
-                    app:menu="@menu/top_menu" />
-            </com.google.android.material.appbar.AppBarLayout>
+                android:layout_height="wrap_content"/>
 
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_below="@+id/topBar"
+            android:layout_above="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <!-- bottom navigation -->
+            <TextView
+                android:id="@+id/main_event_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="5dp"
+                android:fontFamily="monospace"
+                android:text="Event name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/goingTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_event_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="5dp"
+                android:fontFamily="monospace"
+                android:text="@string/going"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp" />
+
+            <ListView
+                android:id="@+id/going_RV"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/goingTv"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/cantgoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/going_RV"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="5dp"
+                android:fontFamily="monospace"
+                android:text="@string/cant_go"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp" />
+
+            <ListView
+                android:id="@+id/cant_go_RV"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/cantgoTv"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
+        </RelativeLayout>
+
+
+        <!-- bottom navigation
         <RelativeLayout
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true">
 
             <include layout="@layout/bottom_navigation" />
 
-        </RelativeLayout>
+        </RelativeLayout>-->
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_anchor="@+id/relativeLayout"
-        app:layout_anchorGravity="center">
-
-        <TextView
-            android:id="@+id/main_event_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5dp"
-            android:fontFamily="monospace"
-            android:text="Event name"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/goingTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_event_title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5dp"
-            android:fontFamily="monospace"
-            android:text="@string/going"
-            android:textColor="@color/colorPrimary"
-            android:textSize="26sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/going_RV"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_below="@+id/goingTv"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-
-        <TextView
-            android:id="@+id/cantgoTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/going_RV"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5dp"
-            android:fontFamily="monospace"
-            android:text="@string/cant_go"
-            android:textColor="@color/colorPrimary"
-            android:textSize="26sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cant_go_RV"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_below="@+id/cantgoTv"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp" />
-    </RelativeLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

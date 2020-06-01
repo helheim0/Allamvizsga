@@ -21,18 +21,12 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="n">
 
-        <activity
-            android:name=".activities.TeamDetailActivity"
-            android:parentActivityName=".activities.TeamsActivity" />
-        <activity
-            android:name=".activities.EventDetailActivity"
-            android:parentActivityName=".activities.EventsActivity" />
-
         <service
             android:name=".MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:permission="com.google.android.c2dm.permission.SEND"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -40,16 +34,29 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".activities.TeamDetailActivity"
+            android:exported="true"
+            android:parentActivityName=".activities.TeamsActivity" />
+        <activity
+            android:name=".activities.EventDetailActivity"
+            android:parentActivityName=".activities.EventsActivity" />
         <activity android:name=".activities.EventsActivity" />
         <activity
             android:name=".activities.TeamAdminActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
             android:parentActivityName=".activities.TeamsActivity" />
-        <activity android:name=".activities.EventInvitationActivity" />
+        <activity
+            android:name=".activities.EventInvitationActivity"
+            android:exported="true" />
         <activity android:name=".activities.TeamsActivity" />
         <activity android:name=".activities.CreateEventActivity" />
         <activity android:name=".activities.CreateTeamActivity" />
-        <activity android:name=".activities.AcceptInvitationActivity" />
-        <activity android:name=".activities.HomePageActivity" />
+        <activity
+            android:name=".activities.AcceptInvitationActivity"
+            android:exported="true" />
+        <activity android:name=".activities.HomePageActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.MainActivity">
@@ -63,6 +70,12 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="true" />
+        <meta-data
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
     </application>
 
 </manifest>

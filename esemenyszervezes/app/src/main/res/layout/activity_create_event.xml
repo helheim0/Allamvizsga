@@ -14,8 +14,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/topBar"/>
+            android:layout_height="50dp"
+            android:id="@+id/topBar"
+            style="@style/MyTheme">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/my_event_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:titleTextColor="@color/colorPrimary"/>
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/layout"
@@ -55,16 +62,40 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/spinner"
                         android:hint="@string/event_name"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Location text input-->
+            <!-- Date text input-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date_til"
+                style="@style/TextInputLayoutAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eventName_til"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:textSize="23sp"
+                app:boxStrokeColor="@color/colorPrimaryDark">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/date"
+                    android:maxLines="5"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Location text input-->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/location_til"
                     style="@style/TextInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/eventName_til"
+                    android:layout_below="@+id/date_til"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="18dp"
@@ -103,36 +134,12 @@
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-
-                <!-- Date text input-->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/date_til"
-                    style="@style/TextInputLayoutAppearance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/desc_til"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="18dp"
-                    android:textSize="23sp"
-                    app:boxStrokeColor="@color/colorPrimaryDark">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/date_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:hint="@string/date"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
             <!-- Create button -->
             <Button
                     android:id="@+id/create_button"
                     android:layout_width="260dp"
                     android:layout_height="60dp"
-                    android:layout_below="@+id/date_til"
+                    android:layout_below="@+id/desc_til"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="14dp"
@@ -141,7 +148,7 @@
                     android:textColor="@color/myWhite" />
         </RelativeLayout>
 
-        <RelativeLayout
+      <!--  <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/bottomBar"
@@ -155,7 +162,7 @@
                 app:itemTextColor="@color/colorPrimary"
                 app:itemIconTint="@color/colorPrimary"
                 app:menu="@menu/main_menu"/>
-        </RelativeLayout>
+        </RelativeLayout>-->
 
     </RelativeLayout>
 

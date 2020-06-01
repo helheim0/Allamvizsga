@@ -8,12 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.esemenyszervezes.R;
 import com.example.esemenyszervezes.adapters.EventAdapter;
 import com.example.esemenyszervezes.api.ApiEvents;
-import com.example.esemenyszervezes.api.ApiService;
 import com.example.esemenyszervezes.api.RetrofitBuilder;
 import com.example.esemenyszervezes.pojo.BottomNavigationHelper;
 import com.example.esemenyszervezes.pojo.Event;
-import com.example.esemenyszervezes.pojo.SaveSharedPrefs;
-import com.google.android.gms.common.api.Api;
+import com.example.esemenyszervezes.pojo.OnItemClickListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import android.content.Context;
@@ -24,15 +22,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +39,7 @@ public class EventsActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "LoginPrefs";
     public static final String EVENT_DETAIL = "EVENT_DETAIL";
     private Context mContext = EventsActivity.this;
-    private Event mEvent;
+    private Event mEvent = new Event();
     private String token, name;
     private int id;
     private EventAdapter adapter;
@@ -52,6 +47,7 @@ public class EventsActivity extends AppCompatActivity {
     private List<Event> eventList = new ArrayList<>();
     private List<Response> result;
     private TextView noEvents;
+    private ImageView add, more;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +61,70 @@ public class EventsActivity extends AppCompatActivity {
         Log.d(TAG, "onResponse: id " + id + "token " + token);
 
         noEvents = findViewById(R.id.noEvents);
-        recyclerView = (RecyclerView) findViewById(R.id.event_recyclerview);
+        recyclerView = findViewById(R.id.event_recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new EventAdapter(mContext, eventList);
         recyclerView.setAdapter(adapter);
 
+       adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
+            @Override
+            public void onAddClicked(int position) {
+               addClick(position);
+            }
+
+            @Override
+            public void onMoreClicked(int position) {
+                moreClick(position);
+            }
+        });
+
         loadData();
+        setButtons();
         setupBottomNavigationView();
     }
 
+    public void addClick(int position){
+        final Event addEvent = eventList.get(position);
+        Intent i = new Intent(EventsActivity.this, EventInvitationActivity.class);
+        i.putExtra("name", addEvent.getName());
+        i.putExtra("description", addEvent.getDescription());
+        i.putExtra("date", addEvent.getDate());
+        i.putExtra("location", addEvent.getLocation());
+        Log.d("hello", addEvent.getName());
+        startActivity(i);
+    }
+
+    public void moreClick(int position){
+        final Event event = eventList.get(position);
+        Intent i = new Intent(EventsActivity.this, EventDetailActivity.class);
+        i.putExtra("name", event.getName());
+        Log.d("more hello", event.getName());
+        startActivity(i);
+    }
+
+    public void setButtons() {
+        add = findViewById(R.id.add_icon);
+        more = findViewById(R.id.more_icon);
+        Log.d(TAG, "setButtons: called");
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: add onclicklistener");
+                int position = Integer.parseInt(String.valueOf(v.getId()));
+                addClick(position);
+            }
+        });
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = Integer.parseInt(String.valueOf(v.getId()));
+                moreClick(position);
+            }
+        });
+    }
+
+    //Listing events
     private void loadData(){
         ApiEvents service = RetrofitBuilder.getRetrofitInstance().create(ApiEvents.class);
         Call<List<Event>> call = service.listEvents("Bearer" + token, id);
@@ -83,16 +133,20 @@ public class EventsActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<Event>> call, @NonNull Response<List<Event>> response) {
                 if (response.isSuccessful() && response.body()!=null) {
                     Log.d(TAG, "onResponse: loadData called");
-                /*  String token = response.headers().get("Authorization");
-                    if (token != null) {
-                        Log.e("tokenTAG", "Token : " + token);
-                        sendToken = token;
-                    }*/
-
                     eventList = response.body();
                     adapter = new EventAdapter(mContext, eventList);
-
                     recyclerView.setAdapter(adapter);
+                    adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
+                        @Override
+                        public void onAddClicked(int position) {
+                            addClick(position);
+                        }
+
+                        @Override
+                        public void onMoreClicked(int position) {
+                            moreClick(position);
+                        }
+                    });
                 }
                 else if(response.body() == null){
                     noEvents.setVisibility(View.VISIBLE);
@@ -116,20 +170,18 @@ public class EventsActivity extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
         return super.onOptionsItemSelected(item);
     }
+
     //Setting up bottom navigation
     private void setupBottomNavigationView(){
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
-        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation);
+        BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottom_navigation);
         BottomNavigationHelper.setupBottomNavigationView(bottomNavigationViewEx);
         BottomNavigationHelper.enableNavigation(mContext, bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();

@@ -20,22 +20,26 @@ public class Team implements Parcelable {
     @Expose
     private String mDescription;
 
-    @SerializedName("image")
+    @SerializedName("code")
     @Expose
-    private String mImage;
+    private String mCode;
 
     @SerializedName("admin_id")
     @Expose
     private int mAdminId;
 
+    @SerializedName("role_id")
+    @Expose
+    private int mRole;
+
     //Constructors
     public Team(){ }
 
-   /* public Team(String mName, String mDescription, String mImage){
+   public Team(String mName, String mDescription, String mCode){
         this.mName = mName;
         this.mDescription = mDescription;
-        this.mImage = mImage;
-    }*/
+        this.mCode = mCode;
+    }
 
     public Team(String mName, String mDescription){
         this.mName = mName;
@@ -43,12 +47,14 @@ public class Team implements Parcelable {
     }
 
     protected Team(Parcel in) {
+        mId = in.readInt();
         mName = in.readString();
         mDescription = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mId);
         dest.writeString(mName);
         dest.writeString(mDescription);
     }
@@ -71,6 +77,10 @@ public class Team implements Parcelable {
     };
 
     //Initializing getters and setters
+    public int getId(){
+        return mId;
+    }
+
     public String getName(){
         return mName;
     }
@@ -79,8 +89,16 @@ public class Team implements Parcelable {
         return mDescription;
     }
 
-    public String getImage(){
-        return mImage;
+    public String getCode(){
+        return mCode;
+    }
+
+    public int getRole(){
+        return mRole;
+    }
+
+    public void setId(){
+        this.mId = mId;
     }
 
     public void setName(){
@@ -91,8 +109,13 @@ public class Team implements Parcelable {
         this.mDescription = mDescription;
     }
 
-    public void setImage(){
-        this.mImage = mImage;
+    public void setCode(){
+        this.mCode = mCode;
     }
+
+    public void setRole(){
+        this.mRole = mRole;
+    }
+
 
 }

@@ -9,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitBuilder {
 
     private static final String BASE_URL = "http://10.0.2.2/laravel/allamvizsga_backend/public/api/";
-  //  private final static OkHttpClient client = buildClient();
     private static Retrofit retrofit;
 
     private static Gson gson = new GsonBuilder()

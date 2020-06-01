@@ -5,6 +5,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="open">"Open"</string>
+    <string name="close">"Close"</string>
 
 
     <string name="team_api">![CDATA[https://localhost/laravel/allamvizsga_backend/public/api/teams]]</string>
@@ -51,8 +53,9 @@
     <string name="invitation_code">Invitation code</string>
     <string name="enter_code">Enter code</string>
     <string name="join">Join</string>
-    <string name="decline">Decline the invitation.</string>
+    <string name="decline">I don\'t want to join.</string>
     <string name="enter_inv_code">Enter invitation code</string>
+    <string name="join_team">Join the team!</string>
 
     <!-- HOMEPAGE -->
     <string name="upcoming_events">My upcoming events</string>
@@ -72,8 +75,10 @@
     <string name="members">Members</string>
     <string name="events">Events</string>
     <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
     <string name="no_teams">You have no teams yet! Don\'t worry, click on the \'+\' icon to get started or join a team!</string>
     <string name="no_events">You have no upcoming events!</string>
+    <string name="no_members">No members yet!</string>
 
 
     <!-- Menu -->
@@ -81,6 +86,9 @@
     <string name="profile">Profile</string>
     <string name="teams">Teams</string>
     <string name="fcm_token">FCM Token: %s</string>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 
 
 </resources>

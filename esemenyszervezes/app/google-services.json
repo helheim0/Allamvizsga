@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "244780418588",
-    "firebase_url": "https://squnion-47a2e.firebaseio.com",
-    "project_id": "squnion-47a2e",
-    "storage_bucket": "squnion-47a2e.appspot.com"
+    "project_number": "732960526695",
+    "firebase_url": "https://allamvizsga-5d0de.firebaseio.com",
+    "project_id": "allamvizsga-5d0de",
+    "storage_bucket": "allamvizsga-5d0de.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:244780418588:android:d0aa659c19dc03254881d9",
+        "mobilesdk_app_id": "1:732960526695:android:a25b1f1ae5c63441815fc2",
         "android_client_info": {
           "package_name": "com.example.esemenyszervezes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "244780418588-7vdojljh1g4jmd403n2vi30m3hdfvut3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.esemenyszervezes",
-            "certificate_hash": "856a675e9a321d736ae6f3b5cd1c3493562bee18"
-          }
-        },
-        {
-          "client_id": "244780418588-o44gv9er69ms5uil0pc11sfmiu7slh44.apps.googleusercontent.com",
+          "client_id": "732960526695-qhobv8op8uin3ugsamd7ctoe7ke3u51s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDhS8ZMJ-iUlQEVFjLYP4b8gQBD66ygPd4"
+          "current_key": "AIzaSyBXR3QcoCp2qhm8uAWD3pQ2Avmph2_jYRM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "244780418588-o44gv9er69ms5uil0pc11sfmiu7slh44.apps.googleusercontent.com",
+              "client_id": "732960526695-qhobv8op8uin3ugsamd7ctoe7ke3u51s.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

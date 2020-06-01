@@ -88,6 +88,9 @@ public class Event implements Parcelable {
         this.mDescription = mDescription;
     }
 
+    public void getIcon() {
+
+    }
     // Parcelling part
     protected Event(Parcel in){
         mName = in.readString();

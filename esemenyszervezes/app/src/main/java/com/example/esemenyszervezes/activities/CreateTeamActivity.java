@@ -17,18 +17,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.esemenyszervezes.R;
-import com.example.esemenyszervezes.api.ApiService;
 import com.example.esemenyszervezes.api.RetrofitBuilder;
 import com.example.esemenyszervezes.api.TeamService;
 import com.example.esemenyszervezes.pojo.BottomNavigationHelper;
 import com.example.esemenyszervezes.pojo.Result;
-import com.example.esemenyszervezes.pojo.SaveSharedPrefs;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class CreateTeamActivity extends AppCompatActivity {
     private EditText mName, mDescription;
@@ -45,10 +44,6 @@ public class CreateTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
 
-      /*  Intent intent = getIntent();
-        token = intent.getStringExtra("token");
-        id = intent.getIntExtra("id", 0);*/
-       // getData();
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         token = settings.getString("token", "");
         id = settings.getInt("id", 0);
@@ -67,13 +62,10 @@ public class CreateTeamActivity extends AppCompatActivity {
 
                 //Checking input fields
                 if (checkValidity(name, description)) {
-
                     Log.d(TAG, "onClick: called");
                     final ProgressDialog progressDialog = new ProgressDialog(CreateTeamActivity.this);
                     progressDialog.setMessage("Creating team...");
                     progressDialog.show();
-
-                    //
 
                     TeamService service = RetrofitBuilder.getRetrofitInstance().create(TeamService.class);
                     Call<Result> call = service.createTeam("Bearer " + token, name, description, id);
@@ -85,13 +77,12 @@ public class CreateTeamActivity extends AppCompatActivity {
                         public void onResponse(@NonNull Call<Result> call, @NonNull Response<Result> response) {
                             progressDialog.dismiss();
                             if (response.isSuccessful()) {
-                              /*  assert response.body() != null;
-                                token = response.headers().get("Authorization");*/
                                 Log.d(TAG, "successful: passed params" + name + description );
-                                Log.d(TAG, "successfuul: passed id" + id);
-                                Intent home = new Intent(CreateTeamActivity.this, TeamAdminActivity.class);
+                                Log.d(TAG, "successful: passed id" + id);
+                                Intent home = new Intent(CreateTeamActivity.this, TeamsActivity.class);
                                 assert response.body() != null;
                                 home.putExtra("token", response.body().getAccess_token());
+                                home.putExtra("name", name);
                                 startActivity(home);
                             } else {
                                 Log.d(TAG, "wrong: passed params" + name + description );
@@ -105,9 +96,8 @@ public class CreateTeamActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             Log.d(TAG, "fail: passed params" + name + description );
                             Log.d(TAG, "fail: passed id" + id);
-                            Log.d("Error", t.getMessage());
+                            Log.d("Error", Objects.requireNonNull(t.getMessage()));
                             Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-
                         }
                     });
                 }
@@ -134,13 +124,11 @@ public class CreateTeamActivity extends AppCompatActivity {
             mName.requestFocus();
             return false;
         }
-
         else if(description.isEmpty()){
             mDescription.setError("Description cannot be empty!");
             mDescription.requestFocus();
             return false;
         }
         else return true;
-
     }
 }

@@ -33,6 +33,10 @@ public class User {
 
     }
 
+    public User(String mUsername){
+        this.mUsername = mUsername;
+    }
+
     public User(String mUsername, String mFullname, int mPhone, String mEmail){
         this.mUsername = mUsername;
         this.mFullname = mFullname;

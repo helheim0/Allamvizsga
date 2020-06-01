@@ -66,7 +66,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 public void onResponse(Call<Result> call, Response<Result> response) {
                     Log.w(TAG, "onResponse: " + response);
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    assert response.body() != null;
+                    //Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
